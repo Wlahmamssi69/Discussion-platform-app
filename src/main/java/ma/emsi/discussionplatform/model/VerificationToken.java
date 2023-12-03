@@ -1,11 +1,9 @@
 package ma.emsi.discussionplatform.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,13 +16,14 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor @AllArgsConstructor
 @Data
 @Entity
+@Builder
 public class VerificationToken {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String token;
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
     private Instant expiryDate;
 }
